@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NutriScan - Inteligência Nutricional para Clínicas</title>
+    <style>
+        
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;700;900&family=Share+Tech+Mono&display=swap');
+
+:root {
+    --bg: #0d0e10;
+    --card-bg: #14161a;
+    --accent: #39ff14; /* Acid Green */
+    --accent-red: #ff3131; /* Neon Red */
+    --text: #f3f4f6;
+    --text-muted: #9ca3af;
+    --border: 2px solid #39ff14;
+    --border-red: 2px solid #ff3131;
+    --border-muted: 2px solid #374151;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Outfit', sans-serif;
+}
+
+body {
+    background-color: var(--bg);
+    color: var(--text);
+    padding: 2rem 1rem;
+    line-height: 1.6;
+    background-image: radial-gradient(rgba(57, 255, 20, 0.1) 1px, transparent 1px);
+    background-size: 20px 20px;
+}
+
+.container {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+/* Header / HUD styling */
+header {
+    border: var(--border);
+    padding: 2rem;
+    margin-bottom: 2rem;
+    background: var(--card-bg);
+    position: relative;
+    box-shadow: 6px 6px 0px #39ff14;
+}
+
+h1 {
+    font-size: 2.8rem;
+    font-weight: 900;
+    letter-spacing: -0.05em;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+    color: var(--text);
+    font-family: 'Share Tech Mono', monospace;
+}
+
+.badge-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.badge {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.8rem;
+    padding: 0.3rem 0.6rem;
+    background: #000;
+    border: 1px solid var(--accent);
+    color: var(--accent);
+    text-transform: uppercase;
+}
+
+.badge.danger {
+    border-color: var(--accent-red);
+    color: var(--accent-red);
+}
+
+/* Cards and Grid */
+.grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+@media(min-width: 768px) {
+    .grid {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+.card {
+    background: var(--card-bg);
+    border: var(--border-muted);
+    padding: 1.5rem;
+    position: relative;
+    transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s;
+}
+
+.card:hover {
+    border-color: var(--accent);
+    transform: translate(-4px, -4px);
+    box-shadow: 4px 4px 0px var(--accent);
+}
+
+.card.interactive {
+    border: var(--border);
+    box-shadow: 4px 4px 0px var(--accent);
+}
+
+h2, h3 {
+    font-family: 'Share Tech Mono', monospace;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+}
+
+h2 {
+    font-size: 1.8rem;
+    border-bottom: 1px solid #374151;
+    padding-bottom: 0.5rem;
+    margin-top: 2rem;
+    margin-bottom: 1.5rem;
+}
+
+/* Interactive Simulator */
+.simulator {
+    background: #000;
+    border: var(--border);
+    border-radius: 4px;
+    padding: 1rem;
+    font-family: 'Share Tech Mono', monospace;
+    min-height: 250px;
+    margin-bottom: 2rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.sim-header {
+    border-bottom: 1px solid #333;
+    padding-bottom: 0.5rem;
+    margin-bottom: 1rem;
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.9rem;
+    color: var(--accent);
+}
+
+.sim-content {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+    overflow-y: auto;
+    max-height: 350px;
+    padding: 0.5rem;
+}
+
+.message {
+    padding: 0.5rem 0.8rem;
+    border-radius: 4px;
+    max-width: 80%;
+    font-size: 0.95rem;
+}
+
+.message.user {
+    background: #1f2937;
+    color: #fff;
+    align-self: flex-end;
+}
+
+.message.bot {
+    background: #111827;
+    border-left: 3px solid var(--accent);
+    color: var(--accent);
+    align-self: flex-start;
+}
+
+.sim-input-area {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 1rem;
+}
+
+.sim-input {
+    flex-grow: 1;
+    background: #111;
+    border: 1px solid #333;
+    color: var(--accent);
+    padding: 0.5rem;
+    font-family: 'Share Tech Mono', monospace;
+}
+
+.sim-input:focus {
+    outline: none;
+    border-color: var(--accent);
+}
+
+.btn {
+    background: var(--accent);
+    color: #000;
+    border: none;
+    padding: 0.5rem 1rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    cursor: pointer;
+    font-family: 'Share Tech Mono', monospace;
+    transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
+}
+
+.btn:hover {
+    background: #fff;
+    box-shadow: 2px 2px 0px var(--accent);
+    transform: translate(-2px, -2px);
+}
+
+.btn.danger {
+    background: var(--accent-red);
+    color: #fff;
+}
+
+.btn.danger:hover {
+    box-shadow: 2px 2px 0px var(--accent-red);
+}
+
+/* Security Notice Box */
+.security-notice {
+    border: var(--border-red);
+    background: rgba(255, 49, 49, 0.05);
+    padding: 1.5rem;
+    margin: 2rem 0;
+    box-shadow: 6px 6px 0px var(--accent-red);
+}
+
+.security-notice p {
+    color: #fca5a5;
+    font-size: 0.95rem;
+}
+
+/* Tech Grid */
+.tech-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+    gap: 0.8rem;
+    margin: 1.5rem 0;
+}
+
+.tech-item {
+    background: #111;
+    border: 1px solid #333;
+    text-align: center;
+    padding: 0.8rem 0.5rem;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.9rem;
+    color: #fff;
+}
+
+.tech-item:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+}
+
+/* Contact Links */
+.contact-links {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    margin-top: 3rem;
+    border-top: 1px solid #1f2937;
+    padding-top: 2rem;
+}
+
+.contact-links a {
+    color: var(--accent);
+    text-decoration: none;
+    font-family: 'Share Tech Mono', monospace;
+    font-weight: bold;
+    border: 1px solid var(--accent);
+    padding: 0.5rem 1rem;
+    transition: all 0.2s;
+}
+
+.contact-links a:hover {
+    background: var(--accent);
+    color: #000;
+    box-shadow: 3px 3px 0px #fff;
+    transform: translate(-3px, -3px);
+}
+
+        .price-card {
+            border: var(--border);
+            background: #111;
+            padding: 2rem;
+            text-align: center;
+        }
+        .price-val {
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: var(--accent);
+            margin: 1rem 0;
+            font-family: 'Share Tech Mono', monospace;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header style="text-align: center; box-shadow: 8px 8px 0px #39ff14;">
+            <div class="badge-container" style="justify-content: center;">
+                <span class="badge">SAAS DE PRODUTIVIDADE</span>
+                <span class="badge">SUPORTE A CLÍNICAS</span>
+            </div>
+            <h1>NutriScan IA</h1>
+            <p>Conecte seus pacientes de forma autônoma. Reduza desistências de dieta em até 80% usando a assistente de WhatsApp MarIA.</p>
+            <button class="btn" style="margin-top: 1.5rem; padding: 0.8rem 2rem; font-size: 1.1rem;">Assine Agora</button>
+        </header>
+
+        <h2 style="text-align: center;">💰 Nossos Planos SaaS</h2>
+        <div class="grid">
+            <div class="card price-card">
+                <h3>Plano Solo</h3>
+                <p>Ideal para nutricionistas individuais.</p>
+                <div class="price-val">R$ 97/mês</div>
+                <p style="margin-bottom: 1rem;">Suporte para até 20 pacientes ativos no WhatsApp com IA.</p>
+                <button class="btn">Assinar via Pix</button>
+            </div>
+            <div class="card price-card" style="border-color: var(--accent); box-shadow: 4px 4px 0px var(--accent);">
+                <h3>Plano Premium</h3>
+                <p>Ideal para clínicas em crescimento.</p>
+                <div class="price-val">R$ 197/mês</div>
+                <p style="margin-bottom: 1rem;">Pacientes ilimitados, RLS integrado e painel multitenant.</p>
+                <button class="btn" style="background: var(--accent);">Assinar via Pix</button>
+            </div>
+        </div>
+
+        <div class="contact-links">
+            <a href="https://www.linkedin.com/in/nemilsonalves" target="_blank">LinkedIn</a>
+            <a href="mailto:nemilson.alves.dev@gmail.com">E-mail</a>
+        </div>
+    </div>
+</body>
+</html>
